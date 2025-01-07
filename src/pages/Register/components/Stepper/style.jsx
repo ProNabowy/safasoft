@@ -4,12 +4,13 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 export const StepCircleIconContainer = styled('div')(({ theme }) => ({
     backgroundColor: '#ccc',
     zIndex: 20,
-    width: 50,
-    height: 50,
+    width: 63,
+    height: 63,
     color: theme.palette.primary.main,
     display: 'flex',
     background: 'white',
     borderRadius: '50%',
+    transition: 'all 0.3s ease-in-out',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -29,10 +30,11 @@ export const StepCircleIconContainer = styled('div')(({ theme }) => ({
             },
         },
     ],
+
 }));
 
 export const StyledIconContainer = styled('i')(({ theme, isActive, isCompleted }) => ({
-    fontSize: 24,
+    fontSize: 25,
     color: isCompleted ? theme.palette.primary.main : isActive ? theme.palette.danger.main : theme.palette.gray.main,
 }));
 
@@ -53,7 +55,7 @@ export const ProgressBarConnector = styled(StepConnector)(({ theme }) => ({
         },
     },
     [`& .${stepConnectorClasses.line}`]: {
-        height: 8,
+        height: 15,
         border: 0,
         position: 'relative',
         backgroundColor: '#eaeaf0',
@@ -63,7 +65,7 @@ export const ProgressBarConnector = styled(StepConnector)(({ theme }) => ({
     '&::before': {
         content: '""', // Required to render the pseudo-element
         position: 'absolute',
-        top: '-7px',
+        top: '10px',
         left: '-15px',
         width: `110%`,
         height: 7,
@@ -73,7 +75,7 @@ export const ProgressBarConnector = styled(StepConnector)(({ theme }) => ({
     '&::after': {
         content: '""',
         position: 'absolute',
-        bottom: '-7px',
+        bottom: '10px',
         left: '-15px',
         width: `110%`,
         height: 7,

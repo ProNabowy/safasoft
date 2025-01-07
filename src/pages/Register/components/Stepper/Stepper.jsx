@@ -21,10 +21,10 @@ function MultiStepIcon(props) {
     );
 }
 
-export default function RegisterStepper() {
+export default function RegisterStepper({ activeStep }) {
     return (
         <Stack sx={{ width: '90%' }} spacing={4}>
-            <Stepper alternativeLabel sx={{ position: 'relative' }} activeStep={1} connector={<ProgressBarConnector />}>
+            <Stepper alternativeLabel sx={{ position: 'relative' }} activeStep={activeStep} connector={<ProgressBarConnector />}>
                 {new Array(4).fill(true).map((_, index) => (
                     <Step key={index}>
                         <StepLabel StepIconComponent={MultiStepIcon}></StepLabel>
