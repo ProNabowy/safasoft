@@ -7,6 +7,7 @@ import { useDataGetter } from './data';
 import Verification from '../Verification';
 import UploadLogo from '../UploadLogo';
 import Ready from '../Ready/Ready';
+import Congrats from '../Congrats';
 
 
 const title = {
@@ -47,6 +48,12 @@ export default function Form({ activeStep, setActiveIndex }) {
 
         }
 
+        if (activeStep === 4) {
+
+            return <Congrats />
+
+        }
+
     }
 
     return (
@@ -59,7 +66,8 @@ export default function Form({ activeStep, setActiveIndex }) {
 
             </FormContainer>
 
-            <ActionsButton activeStep={activeStep} setActiveIndex={setActiveIndex} />
+            {/* {activeStep < 4 && <ActionsButton activeStep={activeStep} setActiveIndex={setActiveIndex} />} */}
+            {<ActionsButton activeStep={activeStep} setActiveIndex={setActiveIndex} />}
 
         </Stack>
     )

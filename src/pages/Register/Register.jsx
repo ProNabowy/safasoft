@@ -9,7 +9,7 @@ export default function Register() {
     return (
         <StyledRegisterContainer direction={'column'}>
 
-            <Stepper activeStep={activeStep} />
+            {activeStep < 4 && <Stepper activeStep={activeStep} />}
 
             <Form
                 activeStep={activeStep}
