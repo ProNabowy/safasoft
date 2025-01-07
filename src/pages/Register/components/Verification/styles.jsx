@@ -1,4 +1,4 @@
-import { InputAdornment, styled } from "@mui/material";
+import { InputAdornment, styled, Typography } from "@mui/material";
 
 export const StyledAutocompleteAdornment = styled(InputAdornment)(({ theme }) => ({
     ['& .MuiInputBase-root fieldset']: {
@@ -9,3 +9,12 @@ export const StyledAutocompleteAdornment = styled(InputAdornment)(({ theme }) =>
     },
 
 }))
+
+export const StyledTypography = styled(Typography)(({ theme }) => ({
+    color: '#686d71',
+    textAlign: 'center',
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(3.5),
+    fontSize: '14px',
+    fontWeight: 500
+}));

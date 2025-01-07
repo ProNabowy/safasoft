@@ -1,7 +1,7 @@
 import { Stack, TextField, Autocomplete as MuiAutocomplete } from '@mui/material'
 import React from 'react'
 import { Autocomplete, PrefixInput, InputNumberMask, } from '@/components';
-import { StyledAutocompleteAdornment } from './styles';
+import { StyledAutocompleteAdornment, StyledTypography } from './styles';
 
 const companies = [
     { name: "Safa", id: 1 },
@@ -23,6 +23,8 @@ const cities = [
 export default function Verification({ formik }) {
     return (
         <Stack direction={'column'} gap={4}>
+
+            <StyledTypography>Entering this information correctly will facilitate the company verification process</StyledTypography>
 
             <TextField
                 placeholder={'Enter your company name'}

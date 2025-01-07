@@ -6,6 +6,13 @@ import ActionsButton from '../ActionsButton';
 import { useDataGetter } from './data';
 import Verification from '../Verification';
 
+
+const title = {
+    0: 'Tell us more about you.',
+    1: 'Verify your company',
+    2: 'Upload Company Logo',
+}
+
 export default function Form({ activeStep, setActiveIndex }) {
 
     const {
@@ -30,7 +37,7 @@ export default function Form({ activeStep, setActiveIndex }) {
 
     return (
         <Stack width={'100%'} gap={5}>
-            <StyledTypography>Tell us more about you.</StyledTypography>
+            <StyledTypography>{title[activeStep]}</StyledTypography>
 
             <FormContainer>
 
