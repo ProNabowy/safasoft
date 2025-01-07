@@ -6,6 +6,7 @@ import ActionsButton from '../ActionsButton';
 import { useDataGetter } from './data';
 import Verification from '../Verification';
 import UploadLogo from '../UploadLogo';
+import Ready from '../Ready/Ready';
 
 
 const title = {
@@ -37,6 +38,12 @@ export default function Form({ activeStep, setActiveIndex }) {
         if (activeStep === 2) {
 
             return <UploadLogo />
+
+        }
+
+        if (activeStep === 3) {
+
+            return <Ready />
 
         }
 
