@@ -16,13 +16,14 @@ export const StyledContainer = styled(Box)(({ theme }) => ({
 }));
 
 
-export const StyledPrefixInput = styled(TextField)(({ theme, dir }) => ({
+export const StyledPrefixInput = styled(TextField)(({ theme, dir, prefix }) => ({
   position: 'relative',
+  // textAlign: 'initial'
   "& .MuiFormLabel-root": {
-    left: dir === 'ltr' ? theme.spacing(19.5) : 0,
+    left: dir === 'ltr' ? theme.spacing(19.5) : 'initial',
   },
   "& .MuiInputBase-input": {
     position: 'relative',
-    left: dir === 'ltr' ? theme.spacing(19.5) : 0,
+    left: dir === 'ltr' ? theme.spacing(19.5) : 'initial',
   },
 }));

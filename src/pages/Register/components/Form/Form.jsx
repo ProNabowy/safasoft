@@ -4,6 +4,7 @@ import CompanyInfo from '../CompanyInfo'
 import { FormContainer, StyledTypography } from './style';
 import ActionsButton from '../ActionsButton';
 import { useDataGetter } from './data';
+import Verification from '../Verification';
 
 export default function Form({ activeStep, setActiveIndex }) {
 
@@ -16,6 +17,12 @@ export default function Form({ activeStep, setActiveIndex }) {
         if (activeStep === 0) {
 
             return <CompanyInfo formik={formik} />
+
+        }
+
+        if (activeStep === 1) {
+
+            return <Verification formik={formik} />
 
         }
 

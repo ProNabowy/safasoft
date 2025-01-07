@@ -69,13 +69,13 @@ export default function CompanyInfo({ formik }) {
 
                         })
                     }
-                    value={formik.values.city}
+                    value={formik.values.country}
                     variant="filled"
                     options={countries}
                     sx={{ flex: 1 }}
                     getOptionLabel={(option) => option?.name}
                     onChange={(e, value) => {
-                        formik.setFieldValue("city", value);
+                        formik.setFieldValue("country", value);
                     }}
                 />
 

@@ -23,7 +23,7 @@ function PrefixInput({
 	return (
 		<StyledPrefixInput
 			label={label}
-			dir={dir}
+			dir={dir} 
 			variant="filled"
 			InputLabelProps={{
 				shrink: true,
