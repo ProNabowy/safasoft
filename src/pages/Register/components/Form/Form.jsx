@@ -5,6 +5,7 @@ import { FormContainer, StyledTypography } from './style';
 import ActionsButton from '../ActionsButton';
 import { useDataGetter } from './data';
 import Verification from '../Verification';
+import UploadLogo from '../UploadLogo';
 
 
 const title = {
@@ -30,6 +31,12 @@ export default function Form({ activeStep, setActiveIndex }) {
         if (activeStep === 1) {
 
             return <Verification formik={formik} />
+
+        }
+
+        if (activeStep === 2) {
+
+            return <UploadLogo />
 
         }
 
