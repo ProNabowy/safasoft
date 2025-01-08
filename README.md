@@ -100,53 +100,15 @@ Ensure you have the following installed on your system:
 The following users can be used to log in to the application during testing:
 
 ```
-1. **User 1**
-   - Email: `niya@gmail.com`
-   - Password: `123456789`
-
-2. **User 2**
-   - Email: `das@gmail.com`
-   - Password: `dasdsa`
-
-3. **User 3**
-   - Email: `nico@gmail.com`
-   - Password: `1243`
-
-4. **User 4**
-   - Email: `anas@gmail.com`
-   - Password: `12345`
-
-5. **User 5**
-   - Email: `mahmoudramdn20001352000@gmail.com`
-   - Password: `7745687234hfjkhfdfasiu8493295`
-
-6. **User 6**
-   - Email: `liyan@gmail.com`
-   - Password: `12345678`
-
-7. **User 7**
-   - Email: `1111@mail.com`
-   - Password: `1111`
-```
 
 # Key Libraries Used
 
 - **React**: Frontend library.
-- **TailwindCSS**: Utility-first CSS framework for styling.
+- **MUI**: Utility framework for styling UI.
 - **Axios**: HTTP client for API integration.
 - **Vite**: Build tool for faster development.
 - **React Router**: For managing application routes.
 
-## API Integration
-
-- The profile page fetches data from an API endpoint using Axios.
-- Ensure the backend is running and the API URL is correctly configured in the application.
-
-## Improvements and Future Enhancements
-
-- Enhance error messages and input validation feedback.
-- Improve UI/UX with additional animations and transitions.
-- Implement additional features like password recovery.
 
 ## How to Contribute
 
