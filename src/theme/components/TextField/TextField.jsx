@@ -9,7 +9,6 @@ export const TextField = (theme) => ({
 			height: "67px",
 			border: `1px solid ${theme.palette.gray.light}`,
 			borderRadius: theme.spacing(2),
-
 			"& .MuiInputBase-root": {
 				backgroundColor: "transparent !important",
 				"&:after": {
@@ -26,9 +25,6 @@ export const TextField = (theme) => ({
 			},
 			"& .MuiInputBase-input": {
 				paddingTop: theme.spacing(8),
-			},
-			"& .MuiInputBase-input:placeholder": {
-				color: 'red'
 			},
 		},
 

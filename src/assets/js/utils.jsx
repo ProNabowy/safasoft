@@ -19,7 +19,12 @@ function getCookie(name) {
     return null;
 }
 
+const checkFileSize = (file, size) => {
+    const maxSize = size * 1024;
+    return file.size < maxSize;
+};
 export {
     getCookie,
-    setCookie
+    setCookie,
+    checkFileSize,
 }

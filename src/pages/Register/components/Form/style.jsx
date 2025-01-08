@@ -15,7 +15,7 @@ export const StyledTypography = styled(Typography)(({ theme }) => ({
     textAlign: 'center'
 }));
 
-export const FormContainer = styled(Box)(({ theme }) => ({
+export const FormContainer = styled('form')(({ theme }) => ({
     background: 'white',
     borderRadius: theme.spacing(2),
     padding: theme.spacing(4, 5),

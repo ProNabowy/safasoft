@@ -10,3 +10,7 @@ body {
 .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeMedium.MuiAutocomplete-popupIndicator {
     transition: 0.3s all ease-in-out;
 }
+
+.error {
+    border-color: red !important;
+}

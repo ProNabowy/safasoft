@@ -1,6 +1,11 @@
 import { Stack, TextField, } from '@mui/material'
 import React from 'react'
-import { Autocomplete, InputNumberMask, PrefixInput, PasswordInput } from '@/components';
+import {
+    Autocomplete,
+    InputNumberMask,
+    PrefixInput,
+    PasswordInput
+} from '@/components';
 
 const countries = [
     { name: 'Egypt', code: '+20', id: 1 },
@@ -15,89 +20,65 @@ export default function CompanyInfo({ formik }) {
 
             <TextField
                 placeholder={'Enter full name'}
-                name="full_name"
+                name="user_full_name"
                 label={'FULL NAME'}
-                value={formik.values.full_name}
+                value={formik.values.user_full_name}
                 variant="filled"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                error={
-                    formik.touched.full_name &&
-                    Boolean(formik.errors.full_name)
-                }
                 InputLabelProps={{
                     shrink: true,
                 }}
-                helperText={
-                    formik.touched.full_name && formik.errors.full_name
-                }
             />
 
             <TextField
                 placeholder={'Enter your business email'}
-                name="email"
+                type='email'
+                name="user_email"
                 label={'BUSINESS EMAIL'}
-                value={formik.values.email}
+                value={formik.values.user_email}
                 variant="filled"
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={
-                    formik.touched.email &&
-                    Boolean(formik.errors.email)
-                }
                 InputLabelProps={{
                     shrink: true,
                 }}
-                helperText={
-                    formik.touched.email && formik.errors.email
-                }
+
             />
+
 
             <Stack direction={'row'} gap={3} justifyContent={'space-between'}>
 
                 <Autocomplete
-                    formik={formik}
                     inputProps={
                         ({
                             placeholder: "Choose your country",
-                            name: "country",
+                            name: "user_position",
                             label: "COUNTRY",
-                            value: formik.values.email,
+                            value: formik.values.user_position,
                             variant: "filled",
-                            error: formik.touched.email && Boolean(formik.errors.email),
-                            helperText: formik.touched.email && formik.errors.email
-
                         })
                     }
-                    value={formik.values.country}
+                    sx={{ flex: 1 }}
+                    value={formik.values.user_position}
                     variant="filled"
                     options={countries}
-                    sx={{ flex: 1 }}
                     getOptionLabel={(option) => option?.name}
                     onChange={(e, value) => {
-                        formik.setFieldValue("country", value);
+                        formik.setFieldValue("user_position", value);
                     }}
                 />
 
                 <PrefixInput
                     prefix="+20"
                     sx={{ flex: 1 }}
+                    formik={formik}
                     dir="ltr"
                     label={'PHONE NUMBER'}
                     fullWidth
-                    name="phone_number"
+                    name="user_phone"
                     placeholder="Enter your phone number"
-                    value={formik.values.mobile_number}
+                    value={formik.values.user_phone}
                     onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={
-                        formik.touched.mobile_number &&
-                        Boolean(formik.errors.mobile_number)
-                    }
-                    helperText={
-                        formik.touched.mobile_number &&
-                        formik.errors.mobile_number
-                    }
                     InputProps={{
                         inputComponent: InputNumberMask,
                     }}
@@ -107,21 +88,14 @@ export default function CompanyInfo({ formik }) {
 
             <PasswordInput
                 sx={{ flex: 1 }}
+                formik={formik}
                 dir="ltr"
                 label={'PASSWORD'}
                 fullWidth
-                name="password"
+                name="user_password"
                 placeholder="choose a password"
-                value={formik.values.password}
+                value={formik.values.user_password}
                 onChange={formik.handleChange}
-                error={
-                    formik.touched.password &&
-                    Boolean(formik.errors.password)
-                }
-                helperText={
-                    formik.touched.password &&
-                    formik.errors.password
-                }
             />
 
             <PasswordInput
@@ -129,18 +103,10 @@ export default function CompanyInfo({ formik }) {
                 dir="ltr"
                 label={'REPEAT PASSWORD'}
                 fullWidth
-                name="repeat_password"
+                name="user_password_confirmation"
                 placeholder="Repeat your password"
-                value={formik.values.repeat_password}
+                value={formik.values.user_password_confirmation}
                 onChange={formik.handleChange}
-                error={
-                    formik.touched.repeat_password &&
-                    Boolean(formik.errors.repeat_password)
-                }
-                helperText={
-                    formik.touched.repeat_password &&
-                    formik.errors.repeat_password
-                }
             />
 
         </Stack>

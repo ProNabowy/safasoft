@@ -38,7 +38,7 @@ export default function Form({ activeStep, setActiveIndex }) {
 
         if (activeStep === 2) {
 
-            return <UploadLogo />
+            return <UploadLogo formik={formik} />
 
         }
 
@@ -60,14 +60,17 @@ export default function Form({ activeStep, setActiveIndex }) {
         <Stack width={'100%'} gap={5}>
             <StyledTypography>{title[activeStep]}</StyledTypography>
 
-            <FormContainer>
+            <FormContainer onSubmit={formik.handleSubmit}>
 
                 {renderActiveStep()}
 
             </FormContainer>
 
-            {/* {activeStep < 4 && <ActionsButton activeStep={activeStep} setActiveIndex={setActiveIndex} />} */}
-            {<ActionsButton activeStep={activeStep} setActiveIndex={setActiveIndex} />}
+            {<ActionsButton
+                activeStep={activeStep}
+                setActiveIndex={setActiveIndex}
+                formik={formik}
+            />}
 
         </Stack>
     )

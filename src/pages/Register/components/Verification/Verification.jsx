@@ -1,26 +1,28 @@
 import { Stack, TextField, Autocomplete as MuiAutocomplete } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { Autocomplete, PrefixInput, InputNumberMask, } from '@/components';
 import { StyledAutocompleteAdornment, StyledTypography } from './styles';
+import { langs, countries } from './helpers';
 
-const companies = [
-    { name: "Safa", id: 1 },
-    { name: "Safa Visa", id: 1 },
-]
-
-const countries = [
-    { name: 'Egypt', code: '+20', id: 1 },
-    { name: 'Saudi Arabia', code: '+966', id: 2 },
-    { name: 'Kuwait', code: '+965', id: 3 },
-];
-
-const cities = [
-    { name: 'Cairo', id: 1 },
-    { name: 'Jeddah', id: 2 },
-    { name: 'Riyadh', id: 3 },
-]
 
 export default function Verification({ formik }) {
+
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const [selectedCity, setSelectedCity] = useState(null);
+
+
+    const handleChooseCountry = (e, value) => {
+        formik.setFieldValue("company_country_id", value?.id); // Set the selected country ID
+        setSelectedCountry(value); // Update selected country
+        setSelectedCity(null); // Reset the selected city
+        formik.setFieldValue("company_city_id", null); // Clear city value in Formik
+    };
+
+    const handleChooseCity = (e, value) => {
+        formik.setFieldValue("company_city_id", value.id);
+        setSelectedCity(value);
+    }
+
     return (
         <Stack direction={'column'} gap={4}>
 
@@ -28,15 +30,15 @@ export default function Verification({ formik }) {
 
             <TextField
                 placeholder={'Enter your company name'}
-                name="address"
+                name="company_name"
                 label={'COMPANY NAME'}
-                value={formik.values.address}
+                value={formik.values.company_name}
                 variant="filled"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
-                    formik.touched.address &&
-                    Boolean(formik.errors.address)
+                    formik.touched.company_name &&
+                    Boolean(formik.errors.company_name)
                 }
                 InputLabelProps={{
                     shrink: true,
@@ -47,13 +49,13 @@ export default function Verification({ formik }) {
                             <MuiAutocomplete
                                 popupIcon={<i className="fa-solid fa-angle-up" style={{ fontSize: '18px', transition: '1.3s all ease-in-out' }}></i>}
                                 formik={formik}
-                                renderInput={(params) => <TextField {...params} sx={{ height: '100%' }} placeholder='Select' />}
-                                value={formik.values.company_name}
-                                options={companies}
-                                sx={{ minWidth: "120px" }}
-                                getOptionLabel={(option) => option?.name}
+                                renderInput={(params) => <TextField {...params} sx={{ height: '100%' }} placeholder='Lang' />}
+                                value={formik.values.lang}
+                                options={langs}
+                                sx={{ minWidth: "140px" }}
+                                getOptionLabel={(option) => option}
                                 onChange={(e, value) => {
-                                    formik.setFieldValue("company_name", value);
+                                    formik.setFieldValue("lang", value);
                                 }}
                             />
                         </StyledAutocompleteAdornment>
@@ -63,42 +65,42 @@ export default function Verification({ formik }) {
 
             <TextField
                 placeholder={'Enter your address'}
-                name="address"
+                name="company_address"
                 label={'ADDRESS'}
-                value={formik.values.address}
+                value={formik.values.company_address}
                 variant="filled"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
-                    formik.touched.address &&
-                    Boolean(formik.errors.address)
+                    formik.touched.company_address &&
+                    Boolean(formik.errors.company_address)
                 }
                 InputLabelProps={{
                     shrink: true,
                 }}
                 helperText={
-                    formik.touched.address && formik.errors.address
+                    formik.touched.company_address && formik.errors.company_address
                 }
             />
 
             <TextField
                 placeholder={'Enter your Business email'}
-                name="business_email"
+                name="company_business_email"
                 label={'BUSINESS EMAIL'}
                 type='email'
-                value={formik.values.business_email}
+                value={formik.values.company_business_email}
                 variant="filled"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 error={
-                    formik.touched.business_email &&
-                    Boolean(formik.errors.business_email)
+                    formik.touched.company_business_email &&
+                    Boolean(formik.errors.company_business_email)
                 }
                 InputLabelProps={{
                     shrink: true,
                 }}
                 helperText={
-                    formik.touched.business_email && formik.errors.business_email
+                    formik.touched.company_business_email && formik.errors.company_business_email
                 }
             />
 
@@ -109,47 +111,40 @@ export default function Verification({ formik }) {
                     inputProps={
                         ({
                             placeholder: "Choose your country",
-                            name: "country",
+                            name: "company_country_id",
                             label: "COUNTRY",
-                            value: formik.values.email,
                             variant: "filled",
-                            error: formik.touched.email && Boolean(formik.errors.email),
-                            helperText: formik.touched.email && formik.errors.email
+                            error: formik.touched.company_country_id && Boolean(formik.errors.company_country_id),
+                            helperText: formik.touched.company_country_id && formik.errors.company_country_id
 
                         })
                     }
-                    value={formik.values.country}
                     variant="filled"
                     options={countries}
                     sx={{ flex: 1 }}
                     getOptionLabel={(option) => option?.name}
-                    onChange={(e, value) => {
-                        formik.setFieldValue("country", value);
-                    }}
+                    onChange={handleChooseCountry}
                 />
 
                 <Autocomplete
                     formik={formik}
+                    value={selectedCity} // Explicitly set the value
                     inputProps={
                         ({
                             placeholder: "Choose your city",
-                            name: "city",
+                            name: "company_city_id",
                             label: "CITY",
-                            value: formik.values.email,
                             variant: "filled",
-                            error: formik.touched.email && Boolean(formik.errors.email),
-                            helperText: formik.touched.email && formik.errors.email
+                            error: formik.touched.company_city_id && Boolean(formik.errors.company_city_id),
+                            helperText: formik.touched.company_city_id && formik.errors.company_city_id
 
                         })
                     }
-                    value={formik.values.city}
                     variant="filled"
-                    options={cities}
+                    options={selectedCountry?.cities || []}
                     sx={{ flex: 1 }}
                     getOptionLabel={(option) => option?.name}
-                    onChange={(e, value) => {
-                        formik.setFieldValue("city", value);
-                    }}
+                    onChange={handleChooseCity}
                 />
 
 
@@ -163,18 +158,18 @@ export default function Verification({ formik }) {
                     dir="ltr"
                     label={'COMPANY PHONE NUMBER'}
                     fullWidth
-                    name="phone_number"
+                    name="company_phone"
                     placeholder="Enter company phone number"
-                    value={formik.values.mobile_number}
+                    value={formik.values.company_phone}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={
-                        formik.touched.mobile_number &&
-                        Boolean(formik.errors.mobile_number)
+                        formik.touched.company_phone &&
+                        Boolean(formik.errors.company_phone)
                     }
                     helperText={
-                        formik.touched.mobile_number &&
-                        formik.errors.mobile_number
+                        formik.touched.company_phone &&
+                        formik.errors.company_phone
                     }
                     InputProps={{
                         inputComponent: InputNumberMask,
@@ -185,20 +180,20 @@ export default function Verification({ formik }) {
                     prefix="+20"
                     sx={{ flex: 1 }}
                     dir="ltr"
-                    label={'COMPANY ANOTHER PHONE NUMBER'}
+                    label={'COMPANY ANOTHER PHONE NUMBER(Optional)'}
                     fullWidth
-                    name="phone_number"
+                    name="company_extra_data.phone"
                     placeholder="Enter another company phone number"
-                    value={formik.values.mobile_number}
+                    value={formik.values.company_extra_data?.phone}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     error={
-                        formik.touched.mobile_number &&
-                        Boolean(formik.errors.mobile_number)
+                        formik.touched.company_extra_data?.phone &&
+                        Boolean(formik.errors.company_extra_data?.phone)
                     }
                     helperText={
-                        formik.touched.mobile_number &&
-                        formik.errors.mobile_number
+                        formik.touched.company_extra_data?.phone &&
+                        formik.errors.company_extra_data?.phone
                     }
                     InputProps={{
                         inputComponent: InputNumberMask,
