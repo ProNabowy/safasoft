@@ -1,21 +1,14 @@
-import React, { useState } from 'react'
-import { Form, Stepper } from './components'
-import { StyledRegisterContainer } from './components/Form/style'
+import { Form, Stepper } from "./components";
+import { StyledRegisterContainer } from "./components/Form/style";
+import { RegisterProvider } from "./context/RegisterContext";
 
 export default function Register() {
-
-    const [activeStep, setActiveIndex] = useState(0);
-
-    return (
-        <StyledRegisterContainer direction={'column'}>
-
-            {activeStep < 4 && <Stepper activeStep={activeStep} />}
-
-            <Form
-                activeStep={activeStep}
-                setActiveIndex={setActiveIndex}
-            />
-
-        </StyledRegisterContainer>
-    )
+  return (
+    <RegisterProvider>
+      <StyledRegisterContainer direction={"column"}>
+        <Stepper />
+        <Form />
+      </StyledRegisterContainer>
+    </RegisterProvider>
+  );
 }

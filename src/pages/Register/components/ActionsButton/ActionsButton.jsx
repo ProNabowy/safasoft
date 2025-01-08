@@ -1,99 +1,106 @@
-import { Stack, Typography } from '@mui/material'
-import React from 'react'
-import { StyledBackButton, StyledButton, StyledLink } from './style'
+import { Stack, Typography } from "@mui/material";
+import React, { useContext } from "react";
+import { StyledBackButton, StyledButton, StyledLink } from "./style";
+import { RegisterContext } from "../../context/RegisterContext";
 
 const BackToLoginButton = ({ activeStep = 0 }) => {
-    return (
-        activeStep === 0 &&
-        <StyledLink to={''}>
+  return (
+    activeStep === 0 && (
+      <StyledLink to={""}>
+        <i
+          className="fa-solid fa-triangle"
+          style={{ fontSize: "12px", rotate: "270deg" }}
+        ></i>
 
-            <i className="fa-solid fa-triangle" style={{ fontSize: '12px', rotate: "270deg" }}></i>
-
-            <Typography fontSize={'14px'}>Back to login</Typography>
-
-        </StyledLink>
+        <Typography fontSize={"14px"}>Back to login</Typography>
+      </StyledLink>
     )
-}
+  );
+};
 
 const validateSteps = (activeStep, formik) => {
+  if (activeStep === 0) {
+    const keys = [
+      "user_full_name",
+      "user_email",
+      "user_phone",
+      "user_position",
+      "user_password",
+      "user_password_confirmation",
+    ];
 
-    if (activeStep === 0) {
-
-        const keys = ['user_full_name', 'user_email', 'user_phone', 'user_position', 'user_password', 'user_password_confirmation'];
-
-        for (const key of keys) {
-
-            if (formik.errors[key]) return true;
-
-        }
-
-        return false
-
+    for (const key of keys) {
+      if (formik.errors[key]) return true;
     }
 
-    if (activeStep === 1) {
+    return false;
+  }
 
-        const keys = ['company_name', 'company_address', 'company_business_email', 'company_country_id', 'company_city_id', 'company_phone'];
+  if (activeStep === 1) {
+    const keys = [
+      "company_name",
+      "company_address",
+      "company_business_email",
+      "company_country_id",
+      "company_city_id",
+      "company_phone",
+    ];
 
-        for (const key of keys) {
-
-            if (formik.errors[key]) return true;
-
-        }
-
-        return false
-
+    for (const key of keys) {
+      if (formik.errors[key]) return true;
     }
 
-    if (activeStep === 2) {
+    return false;
+  }
 
-        const keys = ['company_avatar'];
+  if (activeStep === 2) {
+    const keys = ["company_avatar"];
 
-        for (const key of keys) {
-
-            if (formik.errors[key]) return true;
-
-        }
-
-        return false;
-
+    for (const key of keys) {
+      if (formik.errors[key]) return true;
     }
 
-}
+    return false;
+  }
+};
 
-export default function ActionsButton({ activeStep = 0, setActiveIndex = () => { }, formik }) {
+export default function ActionsButton({ formik }) {
+  const { isLoading, activeStep, setActiveIndex } = useContext(RegisterContext);
+  const handlePervStep = () => {
+    if (activeStep === 0) return;
 
-    const handlePervStep = () => {
+    setActiveIndex((perv) => perv - 1);
+  };
+  const handleNextStep = () => {
+    if (activeStep === 3) return formik.handleSubmit();
 
-        if (activeStep === 0) return;
+    setActiveIndex((perv) => perv + 1);
+  };
+  console.log(isLoading);
+  return (
+    <Stack
+      direction={"row"}
+      alignItems={"center"}
+      justifyContent={activeStep === 0 ? "space-between" : "end"}
+    >
+      <BackToLoginButton activeStep={activeStep} />
 
-        setActiveIndex(perv => perv - 1);
+      <Stack direction={"row"} gap={3}>
+        {activeStep !== 0 && (
+          <StyledBackButton onClick={handlePervStep} variant="contained">
+            Back
+          </StyledBackButton>
+        )}
 
-    }
-    const handleNextStep = () => {
-
-        if (activeStep === 3) return formik.handleSubmit();
-
-        setActiveIndex(perv => perv + 1)
-    }
-
-    return (
-        <Stack direction={'row'} alignItems={'center'} justifyContent={activeStep === 0 ? 'space-between' : 'end'}>
-
-            <BackToLoginButton activeStep={activeStep} />
-
-            <Stack direction={'row'} gap={3}>
-
-                {activeStep !== 0 && <StyledBackButton onClick={handlePervStep} variant="contained">Back</StyledBackButton>}
-
-                <StyledButton
-                    disabled={validateSteps(activeStep, formik)}
-                    onClick={handleNextStep}
-                    variant="contained"
-                >Next</StyledButton>
-
-            </Stack>
-
-        </Stack>
-    )
+        <StyledButton
+          loading={isLoading}
+          disabled={validateSteps(activeStep, formik)}
+          onClick={handleNextStep}
+          variant="contained"
+        >
+          Next
+        </StyledButton>
+      </Stack>
+    </Stack>
+  );
 }
