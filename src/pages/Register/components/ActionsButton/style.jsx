@@ -19,6 +19,9 @@ const ButtonVariants = {
 
 export const StyledButton = styled(LoadingButton)(({ theme }) => ({
   width: "300px",
+  [theme.breakpoints.down("sm")]: {
+    width: "200px",
+  },
   ...ButtonVariants,
 }));
 export const StyledBackButton = styled(Button)(({ theme }) => ({
@@ -27,6 +30,9 @@ export const StyledBackButton = styled(Button)(({ theme }) => ({
   background: theme.palette.gray.light,
   ["&:hover"]: {
     background: theme.palette.gray.light,
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "200px",
   },
   ...ButtonVariants,
 }));

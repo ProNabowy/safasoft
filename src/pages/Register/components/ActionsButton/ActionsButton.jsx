@@ -1,7 +1,9 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery } from "@mui/material";
 import React, { useContext } from "react";
 import { StyledBackButton, StyledButton, StyledLink } from "./style";
 import { RegisterContext } from "../../context/RegisterContext";
+import { useTheme } from "@emotion/react";
+import theme from "@/theme/theme";
 
 const BackToLoginButton = ({ activeStep = 0 }) => {
   return (
@@ -66,6 +68,8 @@ const validateSteps = (activeStep, formik) => {
 
 export default function ActionsButton({ formik }) {
   const { isLoading, activeStep, setActiveIndex } = useContext(RegisterContext);
+
+  const media = useMediaQuery(theme.breakpoints.down("sm"));
   const handlePervStep = () => {
     if (activeStep === 0) return;
 
@@ -76,16 +80,21 @@ export default function ActionsButton({ formik }) {
 
     setActiveIndex((perv) => perv + 1);
   };
-  console.log(isLoading);
+
   return (
     <Stack
-      direction={"row"}
-      alignItems={"center"}
+      flexDirection={media ? "column" : "row"}
       justifyContent={activeStep === 0 ? "space-between" : "end"}
+      alignItems={media ? "center" : "initial"}
+      flexWrap={"wrap"}
     >
       <BackToLoginButton activeStep={activeStep} />
 
-      <Stack direction={"row"} gap={3}>
+      <Stack
+        direction={media ? "column-reverse" : "row"}
+        alignItems={media ? "center" : "initial"}
+        gap={3}
+      >
         {activeStep !== 0 && (
           <StyledBackButton onClick={handlePervStep} variant="contained">
             Back
